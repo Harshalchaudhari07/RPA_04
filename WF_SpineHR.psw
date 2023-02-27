@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<transformation>
+  <info>
+    <name>WF_SpineHR</name>
+    <description/>
+    <extended_description/>
+    <trans_version/>
+    <trans_type>Normal</trans_type>
+    <directory>&#x2f;</directory>
+    <parameters>
+      <parameter>
+        <name>RTP_Password</name>
+        <description>Des_Password</description>
+        <type>Credential</type>
+        <uiControlType>SingleSelectList</uiControlType>
+        <list_of_values/>
+        <valueSeparator/>
+        <default_value>&#x7b;&#x22;username&#x22;&#x3a;&#x22;&#x22;,&#x22;password&#x22;&#x3a;&#x22;Encrypted 2be98afc86aa7bc85be12bc79fec3fd89&#x22;,&#x22;opt1&#x22;&#x3a;&#x22;&#x22;,&#x22;opt2&#x22;&#x3a;&#x22;&#x22;,&#x22;enc1&#x22;&#x3a;&#x22;&#x22;,&#x22;enc2&#x22;&#x3a;&#x22;&#x22;&#x7d;</default_value>
+        <secret>N</secret>
+        <optional>N</optional>
+        <runtime>N</runtime>
+      </parameter>
+    </parameters>
+    <parameterConfiguration>
+      <grouping>
+      </grouping>
+    </parameterConfiguration>
+    <ps_variables>
+    </ps_variables>
+    <size_rowset>10000</size_rowset>
+    <unique_connections>N</unique_connections>
+    <feedback_shown>Y</feedback_shown>
+    <feedback_size>50000</feedback_size>
+    <partitionschemas>
+    </partitionschemas>
+    <slaveservers>
+    </slaveservers>
+    <clusterschemas>
+    </clusterschemas>
+    <created_user>-</created_user>
+    <created_date>2022&#x2f;06&#x2f;19 16&#x3a;59&#x3a;37.754</created_date>
+    <modified_user>-</modified_user>
+    <modified_date>2022&#x2f;06&#x2f;19 17&#x3a;58&#x3a;25.666</modified_date>
+	<key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
+    <is_key_private>N</is_key_private>
+  </info>
+  <notepads>
+  </notepads>
+  <groups>
+  </groups>
+  <order>
+    <hop>
+      <from>Start Browser</from>
+      <to>Web Composite</to>
+      <enabled>Y</enabled>
+      <visible>Y</visible>
+    </hop>
+    <hop>
+      <from>Generate Rows</from>
+      <to>Start Browser</to>
+      <enabled>Y</enabled>
+      <visible>Y</visible>
+    </hop>
+  </order>
+  <step>
+    <name>Generate Rows</name>
+    <type>RowGenerator</type>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>GR_Password</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>&#x24;&#x7b;RTP_Password&#x7d;</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <limit>1</limit>
+    <never_ending>N</never_ending>
+    <interval_in_ms>5000</interval_in_ms>
+    <row_time_field>now</row_time_field>
+    <last_time_field>FiveSecondsAgo</last_time_field>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>144</xloc>
+      <yloc>336</yloc>
+      <draw>Y</draw>
+    </GUI>
+    </step>
+
+  <step>
+    <name>Start Browser</name>
+    <type>BeginStep</type>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+      <browser>Google Chrome</browser>
+      <ignoreIeProtectedModeSettings>N</ignoreIeProtectedModeSettings>
+      <url>https&#x3a;&#x2f;&#x2f;selfservicehr.vyom-labs.com&#x2f;spinehrms&#x2f;login.aspx</url>
+      <delay>0</delay>
+      <maximize>Y</maximize>
+      <startNode>Y</startNode>
+      <notif>Y</notif>
+      <driverName>BROWSER1</driverName>
+      <pageLoadTime>0</pageLoadTime>
+      <retryCount>0</retryCount>
+      <defaultDownloadDirectory/>
+      <clearBrowser>Y</clearBrowser>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>144</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+    </step>
+
+  <step>
+    <name>Web Composite</name>
+    <type>CompositeStep</type>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+      <driverName>BROWSER1</driverName>
+      <compositeOptions>        <option>          <criteria>X-Path</criteria>
+          <value/>
+          <multiple>No</multiple>
+          <index/>
+          <outputField>AcceptCookies</outputField>
+          <delay>1000</delay>
+          <action>Click</action>
+          <criteriaValue>&#x2f;&#x2f;&#x2a;&#x5b;&#x40;id&#x3d;&#x22;btnAccept&#x22;&#x5d;</criteriaValue>
+          <description/>
+        <criteriaAttributes>        </criteriaAttributes>        </option>        <option>          <criteria>X-Path</criteria>
+          <value>AE0786</value>
+          <multiple>No</multiple>
+          <index/>
+          <outputField>UserName</outputField>
+          <delay>10000</delay>
+          <action>Set Value</action>
+          <criteriaValue>&#x2f;&#x2f;&#x2a;&#x5b;&#x40;id&#x3d;&#x22;txtUser&#x22;&#x5d;</criteriaValue>
+          <description>EnterUserName</description>
+        <criteriaAttributes>        </criteriaAttributes>        </option>        <option>          <criteria>X-Path</criteria>
+          <value>GR_Password</value>
+          <multiple>No</multiple>
+          <index/>
+          <outputField>Password</outputField>
+          <delay>10000</delay>
+          <action>Set Value</action>
+          <criteriaValue>&#x2f;&#x2f;&#x2a;&#x5b;&#x40;id&#x3d;&#x22;txtPassword&#x22;&#x5d;</criteriaValue>
+          <description>Password</description>
+        <criteriaAttributes>        </criteriaAttributes>        </option>        <option>          <criteria>X-Path</criteria>
+          <value/>
+          <multiple>No</multiple>
+          <index/>
+          <outputField>LoginCLick</outputField>
+          <delay>10000</delay>
+          <action>Click</action>
+          <criteriaValue>&#x2f;&#x2f;&#x2a;&#x5b;&#x40;id&#x3d;&#x22;btnLogin&#x22;&#x5d;</criteriaValue>
+          <description>Click</description>
+        <criteriaAttributes>        </criteriaAttributes>        </option>      </compositeOptions>    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>344</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+    </step>
+
+  <step_error_handling>
+  </step_error_handling>
+  <slave-step-copy-partition-distribution>
+  </slave-step-copy-partition-distribution>
+  <slave_workflow>N</slave_workflow>
+</transformation>
